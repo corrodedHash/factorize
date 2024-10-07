@@ -34,7 +34,7 @@ fn replicate_factor(bench_path: &str) {
     let mut file = std::fs::OpenOptions::new()
         .create_new(true)
         .write(true)
-        .open(&format!(
+        .open(format!(
             "benchmark_factor_{:0>20}.json",
             std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)

@@ -121,8 +121,7 @@ impl Bench for RandomU128 {
     }
     fn generate_elements() -> Vec<BenchmarkElement> {
         const BENCH_COUNT: i32 = 100;
-        let mut results = vec![];
-        results.reserve(BENCH_COUNT as usize);
+        let mut results = Vec::with_capacity(BENCH_COUNT as usize);
         for (_, n) in (0..BENCH_COUNT).zip(U128RNG::new()) {
             let start_time = std::time::SystemTime::now();
             n.factor();

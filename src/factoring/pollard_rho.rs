@@ -181,7 +181,7 @@ impl PollardRhoCycleConditionCheckerRug {
             tortoise.clone() - hare
         };
         self.accum = self.field.redc(self.accum.clone() * diff);
-        self.last_tortoise = tortoise.clone();
+        self.last_tortoise.clone_from(tortoise);
         debug_assert_eq!(power.count_ones(), Some(1));
         let power_count = power.find_one(0).unwrap();
 
@@ -190,7 +190,7 @@ impl PollardRhoCycleConditionCheckerRug {
             if d != 1 {
                 return true;
             }
-            self.last_hare = hare.clone();
+            self.last_hare.clone_from(hare);
         }
         false
     }
@@ -279,7 +279,7 @@ fn find_rug_cycle(
     while !cycle_condition.check(&tortoise, &hare, &count, &power) {
         count += 1;
         if power == count {
-            tortoise = hare.clone();
+            tortoise.clone_from(&hare);
             power <<= 1;
             count = rug::Integer::from(0);
         }
